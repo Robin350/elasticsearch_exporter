@@ -35,7 +35,7 @@ func main() {
 		metricsPath = kingpin.Flag("web.telemetry-path",
 			"Path under which to expose metrics.").
 			Default("/metrics").Envar("WEB_TELEMETRY_PATH").String()
-		esURI = "https://" + string(out) + "@elasticsearch:9200"
+		esURI = &("https://" + string(out) + "@elasticsearch:9200")
 		esTimeout = kingpin.Flag("es.timeout",
 			"Timeout for trying to get stats from Elasticsearch.").
 			Default("5s").Envar("ES_TIMEOUT").Duration()
