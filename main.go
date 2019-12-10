@@ -1,4 +1,6 @@
 package main
+import "fmt"
+import "os/exec"
 
 import (
 	"net/http"
@@ -18,6 +20,13 @@ import (
 )
 
 func main() {
+
+    cmd := exec.Command("python",  "/elastic-exporter/get_credentials.py")
+    fmt.Println(cmd.Args)
+    out, err := cmd.CombinedOutput()
+    if err != nil { fmt.Println(err); }
+    fmt.Println(string(out))
+
 	var (
 		Name          = "elasticsearch_exporter"
 		listenAddress = kingpin.Flag("web.listen-address",
@@ -26,9 +35,7 @@ func main() {
 		metricsPath = kingpin.Flag("web.telemetry-path",
 			"Path under which to expose metrics.").
 			Default("/metrics").Envar("WEB_TELEMETRY_PATH").String()
-		esURI = kingpin.Flag("es.uri",
-			"HTTP API address of an Elasticsearch node.").
-			Default("http://localhost:9200").Envar("ES_URI").String()
+		esURI = "https://" + out + "@elasticsearch:9200"
 		esTimeout = kingpin.Flag("es.timeout",
 			"Timeout for trying to get stats from Elasticsearch.").
 			Default("5s").Envar("ES_TIMEOUT").Duration()
@@ -67,7 +74,7 @@ func main() {
 			Default("").Envar("ES_CLIENT_CERT").String()
 		esInsecureSkipVerify = kingpin.Flag("es.ssl-skip-verify",
 			"Skip SSL verification when connecting to Elasticsearch.").
-			Default("false").Envar("ES_SSL_SKIP_VERIFY").Bool()
+			Default("true").Envar("ES_SSL_SKIP_VERIFY").Bool()
 		logLevel = kingpin.Flag("log.level",
 			"Sets the loglevel. Valid levels are debug, info, warn, error").
 			Default("info").Envar("LOG_LEVEL").String()
