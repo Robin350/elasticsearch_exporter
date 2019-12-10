@@ -25,7 +25,6 @@ func main() {
     fmt.Println(cmd.Args)
     out, err := cmd.CombinedOutput()
     if err != nil { fmt.Println(err); }
-    fmt.Println(string(out))
 
 	var (
 		Name          = "elasticsearch_exporter"
@@ -35,7 +34,7 @@ func main() {
 		metricsPath = kingpin.Flag("web.telemetry-path",
 			"Path under which to expose metrics.").
 			Default("/metrics").Envar("WEB_TELEMETRY_PATH").String()
-		esURI = "https://" + out + "@elasticsearch:9200"
+		esURI = "https://" + string(out) + "@elasticsearch:9200"
 		esTimeout = kingpin.Flag("es.timeout",
 			"Timeout for trying to get stats from Elasticsearch.").
 			Default("5s").Envar("ES_TIMEOUT").Duration()
