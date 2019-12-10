@@ -12,8 +12,8 @@ import (
 	"context"
 
 	"github.com/go-kit/kit/log/level"
-	"github.com/justwatchcom/elasticsearch_exporter/collector"
-	"github.com/justwatchcom/elasticsearch_exporter/pkg/clusterinfo"
+	"github.com/Robin350/elasticsearch_exporter/collector"
+	"github.com/Robin350/elasticsearch_exporter/pkg/clusterinfo"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/version"
 	"gopkg.in/alecthomas/kingpin.v2"
