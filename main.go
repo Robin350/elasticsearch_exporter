@@ -21,7 +21,7 @@ import (
 
 func main() {
 
-    cmd := exec.Command("python",  "/elastic-exporter/elastic_exporter_source/script.py")
+    cmd := exec.Command("python",  "./get_credentials.py")
     fmt.Println(cmd.Args)
     out, err := cmd.CombinedOutput()
     if err != nil { fmt.Println(err); }
