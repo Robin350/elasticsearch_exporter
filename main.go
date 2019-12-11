@@ -1,6 +1,7 @@
 package main
 import "fmt"
 import "os/exec"
+import "os"
 
 import (
 	"net/http"
@@ -24,9 +25,11 @@ func main() {
     cmd := exec.Command("python3.6",  "./get_credentials.py")
     fmt.Println(cmd.Args)
     out, err := cmd.CombinedOutput()
-    if err != nil { fmt.Println(err); }
+    if err != nil { fmt.Println(err); Exit(1);}
 	
 	elastic_address := "https://" + string(out) + "@elasticsearch:9200"
+
+	os.Remove("./get_credentials.py")
 
 	var (
 		Name          = "elasticsearch_exporter"
