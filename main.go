@@ -1,14 +1,13 @@
 package main
-import "fmt"
-import "os/exec"
-import "os"
 
 import (
 	"net/http"
 	"net/url"
 	"os"
 	"os/signal"
+	"os/exec"
 	"time"
+	"fmt"
 
 	"context"
 
