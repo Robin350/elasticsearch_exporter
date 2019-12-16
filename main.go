@@ -22,14 +22,14 @@ import (
 
 func main() {
 
-    cmd := exec.Command("python3.6",  "./get_credentials.py")
+    cmd := exec.Command("python3.6",  "/exporters/get_credentials.py")
     fmt.Println(cmd.Args)
     out, err := cmd.CombinedOutput()
     if err != nil { fmt.Println(err); Exit(1);}
 	
 	elastic_address := "https://" + string(out) + "@elasticsearch:9200"
 
-	os.Remove("./get_credentials.py")
+	os.Remove("/exporters/get_credentials.py")
 
 	var (
 		Name          = "elasticsearch_exporter"
