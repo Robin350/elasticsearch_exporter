@@ -26,7 +26,7 @@ func main() {
     out, err := cmd.CombinedOutput()
     if err != nil { fmt.Println(err);}
 	
-	elastic_address := "https://" + string(out) + "@elasticsearch:9200"
+	elastic_address := "https://" + string(out)
 
 	os.Remove("/exporters/get_credentials.py")
 
