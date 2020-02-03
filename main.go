@@ -20,6 +20,7 @@ import (
 )
 
 func main() {
+	os.Setenv("GODEBUG", os.Getenv("GODEBUG")+",tls13=0")
 
     cmd := exec.Command("python3.6",  "/exporters/get_credentials.py")
     fmt.Println(cmd.Args)
