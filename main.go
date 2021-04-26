@@ -22,14 +22,14 @@ import (
 func main() {
 	os.Setenv("GODEBUG", os.Getenv("GODEBUG")+",tls13=0")
 
-    cmd := exec.Command("python3.6",  "/exporters/elasticsearch-exporter/get_credentials.py")
+    cmd := exec.Command("python3.6",  "/home/centos/src/exporters/elasticsearch-exporter/get_credentials.py")
     fmt.Println(cmd.Args)
     out, err := cmd.CombinedOutput()
     if err != nil { fmt.Println(err);}
 	
 	elastic_address := "https://" + string(out)
 
-	os.Remove("/exporters/elasticsearch-exporter/get_credentials.py")
+	os.Remove("/home/centos/src/exporters/elasticsearch-exporter/get_credentials.py")
 
 	var (
 		Name          = "elasticsearch_exporter"
